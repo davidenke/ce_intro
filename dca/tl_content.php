@@ -32,7 +32,7 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'addM4v';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'addWebm';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'addOgv';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['text'] = str_replace(',text', ',intro,text', $GLOBALS['TL_DCA']['tl_content']['palettes']['text']);
-$GLOBALS['TL_DCA']['tl_content']['palettes']['intro'] = '{type_legend},type,headline;{source_legend},imageSRC,addM4v,addWebm,addOgv;{protected_legend:hide},protected';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['intro'] = '{type_legend},type,headline;{source_legend},imageSRC,imageSize,loop,addM4v,addWebm,addOgv;{protected_legend:hide},protected';
 $GLOBALS['TL_DCA']['tl_content']['subpalettes']['fullsize'] = 'fullsizeSRC';
 $GLOBALS['TL_DCA']['tl_content']['subpalettes']['addM4v'] = 'videoSRCm4v';
 $GLOBALS['TL_DCA']['tl_content']['subpalettes']['addWebm'] = 'videoSRCwebm';
@@ -40,6 +40,12 @@ $GLOBALS['TL_DCA']['tl_content']['subpalettes']['addOgv'] = 'videoSRCogv';
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['intro'] = array(
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['intro'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'eval'                    => array('tl_class'=>'clr')
+);
+$GLOBALS['TL_DCA']['tl_content']['fields']['loop'] = array(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['loop'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
 	'eval'                    => array('tl_class'=>'clr')
@@ -67,6 +73,13 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['imageSRC'] = array(
 	'exclude'                 => true,
 	'inputType'               => 'fileTree',
 	'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'jpg,jpeg', 'mandatory'=>true, 'tl_class'=>'clr')
+);
+$GLOBALS['TL_DCA']['tl_content']['fields']['imageSize'] = array(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['imageSize'],
+	'exclude'                 => true,
+	'inputType'               => 'select',
+	'options'                 => array('1280 x 720', '1024 x 576'),
+	'eval'                    => array('tl_class'=>'clr')
 );
 $GLOBALS['TL_DCA']['tl_content']['fields']['videoSRCm4v'] = array(
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['videoSRCm4v'],

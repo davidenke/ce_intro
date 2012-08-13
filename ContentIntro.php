@@ -52,6 +52,18 @@ class ContentIntro extends ContentElement {
 	protected $blnHasVideo = true;
 
 	/**
+	 * Image width
+	 * @var int
+	 */
+	protected $intWidth;
+
+	/**
+	 * Image height
+	 * @var int
+	 */
+	protected $intHeight;
+
+	/**
 	 * Video types
 	 * @var array
 	 */
@@ -67,6 +79,17 @@ class ContentIntro extends ContentElement {
 		if (!strlen($this->imageSRC) || !is_file(TL_ROOT . '/' . $this->imageSRC))
 			return '';
 
+		switch ($this->imageSize) {
+			default:
+			case '1280 x 720':
+				$this->intWidth = 1280;
+				$this->intHeight = 720;
+				break;
+			case '1024 x 576':
+				$this->intWidth = 1024;
+				$this->intHeight = 576;
+				break;
+		}
 		return parent::generate();
 	}
 
@@ -75,8 +98,6 @@ class ContentIntro extends ContentElement {
 	 * Generate the content element
 	 */
 	protected function compile() {
-		$this->Template->image = $this->imageSRC;
-
 		if ($this->addM4v && (!strlen($this->videoSRCm4v) || !is_file(TL_ROOT . '/' . $this->videoSRCm4v))
 		&& ($this->addWebm && (!strlen($this->videoSRCwebm) || !is_file(TL_ROOT . '/' . $this->videoSRCwebm)))
 		&& ($this->addOgv && (!strlen($this->videoSRCogv) || !is_file(TL_ROOT . '/' . $this->videoSRCogv))))
@@ -100,8 +121,11 @@ class ContentIntro extends ContentElement {
 		if (!sizeof($this->arrVideoTypes))
 			$this->blnHasVideo = false;
 
+		$this->Template->image = $this->getImage($this->imageSRC, $this->intWidth, $this->intHeight);
+		$this->Template->sizes = array($this->intWidth, $this->intHeight);
 		$this->Template->types = $this->arrVideoTypes;
 		$this->Template->video = $this->blnHasVideo;
+		$this->Template->loop = $this->loop;
 	}
 }
 

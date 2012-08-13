@@ -32,6 +32,6 @@
 /**
  * Content elements
  */
-$GLOBALS['TL_CTE']['images']['intro'] = 'ContentIntro';
+$GLOBALS['TL_CTE']['media']['intro'] = 'ContentIntro';
 
 ?>

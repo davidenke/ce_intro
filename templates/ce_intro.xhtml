@@ -4,6 +4,77 @@
 <?php endif; ?>
 
 	<div class="image_container">
-		<img src="<?php echo $this->image; ?>" alt="Intro" />
+		<img class="intro_poster" src="<?php echo $this->image; ?>" alt="Intro <?php echo $this->id; ?>">
+<?php if ($this->video): ?>
+		<a class="intro_video" id="intro_player_<?php echo $this->id; ?>" href="<?php echo $this->videfallback; ?>"></a>
+		<script src="/system/modules/ce_intro/html/js/jquery.jplayer.min.js"></script>
+<?php endif; ?>
+		<script>
+			$(document).ready(function() {
+				$(window).resize(function() {
+					var ow = <?php echo $this->sizes[0]; ?>,
+						oh = <?php echo $this->sizes[1]; ?>,
+						fr = $('#wrapper'),
+						fs = $('.intro_poster,.intro_video'),
+						fw = fr.width(),
+						fh = fr.height(),
+						dw = fw / ow,
+						dh = fh / oh;
+				
+					if (dw < dh) fs.css({
+						'width': dh * ow,
+						'height': fh,
+						'left': (fw - (dh * ow)) / 2,
+						'top': 0
+					});
+					else fs.css({
+						'width': fw,
+						'height': dw * oh,
+						'left': 0,
+						'top': (fh - (dw * oh)) / 2
+					});
+				}).resize();
+
+<?php if ($this->video): ?>
+				if (!$('body.mobile').length)
+					$('#intro_player_<?php echo $this->id; ?>').jPlayer({
+						swfPath: '/system/modules/ce_intro/html/swf/jplayer.swf',
+						solution: 'html,flash',
+						preload: 'auto',
+						supplied: '<?php echo implode(',', $this->types); ?>',
+						loop: <?php if ($this->loop): ?>true<?php else: ?>false<?php endif; ?>,
+						wmode: 'window',
+						fullScreen: true,
+						size: {
+							width: '<?php echo $this->sizes[0]; ?>px',
+							height: '<?php echo $this->sizes[1]; ?>px',
+							cssClass: 'fullscreen'
+						},
+						sizeFull: {
+							width: '100%',
+							height: '100%',
+							cssClass: 'fullscreen'
+						},
+						ready: function() {
+							$(this).jPlayer('setMedia', {
+<?php foreach ($this->types as $type): ?>
+								<?php echo $type; ?>: '<?php echo $this->{'video' . $type}; ?>',
+<?php endforeach; ?>
+								poster: '<?php echo $this->image; ?>'
+							}).jPlayer('play');
+							$(window).resize();
+						},
+						play: function() {
+							$('#loader').fadeOut(200);
+						},
+						ended: function() {
+<?php if ($this->loop): ?>
+							$(this).jPlayer('play');
+<?php endif; ?>
+						}
+					});
+<?php endif; ?>
+			});
+		</script>
 	</div>
 </div>
