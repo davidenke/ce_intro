@@ -7,7 +7,7 @@
 		<img class="intro_poster" src="<?php echo $this->image; ?>" alt="Intro <?php echo $this->id; ?>">
 <?php if ($this->video): ?>
 		<a class="intro_video" id="intro_player_<?php echo $this->id; ?>" href="<?php echo $this->videfallback; ?>"></a>
-		<script src="/system/modules/ce_intro/html/js/jquery.jplayer.min.js"></script>
+		<script src="/system/modules/ce_intro/public/js/jquery.jplayer.min.js"></script>
 <?php endif; ?>
 		<script>
 			$(document).ready(function() {
@@ -38,7 +38,7 @@
 <?php if ($this->video): ?>
 				if (!$('body.mobile').length)
 					$('#intro_player_<?php echo $this->id; ?>').jPlayer({
-						swfPath: '/system/modules/ce_intro/html/swf/jplayer.swf',
+						swfPath: '/system/modules/ce_intro/public/swf/jplayer.swf',
 						solution: 'html,flash',
 						preload: 'auto',
 						supplied: '<?php echo implode(',', $this->types); ?>',

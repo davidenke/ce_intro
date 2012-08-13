@@ -31,9 +31,9 @@
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'addM4v';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'addWebm';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'addOgv';
-$GLOBALS['TL_DCA']['tl_content']['palettes']['text'] = str_replace(',text', ',intro,text', $GLOBALS['TL_DCA']['tl_content']['palettes']['text']);
-$GLOBALS['TL_DCA']['tl_content']['palettes']['intro'] = '{type_legend},type,headline;{source_legend},imageSRC,imageSize,loop,addM4v,addWebm,addOgv;{protected_legend:hide},protected';
-$GLOBALS['TL_DCA']['tl_content']['subpalettes']['fullsize'] = 'fullsizeSRC';
+
+$GLOBALS['TL_DCA']['tl_content']['palettes']['intro'] = '{type_legend},type,headline;{source_legend},imageSRC,imageSize,again,addM4v,addWebm,addOgv;{protected_legend:hide},protected';
+
 $GLOBALS['TL_DCA']['tl_content']['subpalettes']['addM4v'] = 'videoSRCm4v';
 $GLOBALS['TL_DCA']['tl_content']['subpalettes']['addWebm'] = 'videoSRCwebm';
 $GLOBALS['TL_DCA']['tl_content']['subpalettes']['addOgv'] = 'videoSRCogv';
@@ -42,70 +42,72 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['intro'] = array(
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['intro'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'clr')
+	'eval'                    => array('tl_class'=>'clr'),
+	'sql'                     => "char(1) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_content']['fields']['loop'] = array(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['loop'],
+$GLOBALS['TL_DCA']['tl_content']['fields']['again'] = array(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['again'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'clr')
+	'eval'                    => array('tl_class'=>'clr'),
+	'sql'                     => "char(1) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_content']['fields']['addM4v'] = array(
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['addM4v'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'clr', 'submitOnChange'=>true)
+	'eval'                    => array('tl_class'=>'clr', 'submitOnChange'=>true),
+	'sql'                     => "char(1) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_content']['fields']['addWebm'] = array(
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['addWebm'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'clr', 'submitOnChange'=>true)
+	'eval'                    => array('tl_class'=>'clr', 'submitOnChange'=>true),
+	'sql'                     => "char(1) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_content']['fields']['addOgv'] = array(
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['addOgv'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'clr', 'submitOnChange'=>true)
+	'eval'                    => array('tl_class'=>'clr', 'submitOnChange'=>true),
+	'sql'                     => "char(1) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_content']['fields']['imageSRC'] = array(
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['imageSRC'],
 	'exclude'                 => true,
 	'inputType'               => 'fileTree',
-	'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'jpg,jpeg', 'mandatory'=>true, 'tl_class'=>'clr')
+	'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'jpg,jpeg', 'mandatory'=>true, 'tl_class'=>'clr'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_content']['fields']['imageSize'] = array(
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['imageSize'],
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options'                 => array('1280 x 720', '1024 x 576'),
-	'eval'                    => array('tl_class'=>'clr')
+	'eval'                    => array('tl_class'=>'clr'),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_content']['fields']['videoSRCm4v'] = array(
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['videoSRCm4v'],
 	'exclude'                 => true,
 	'inputType'               => 'fileTree',
-	'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'m4v', 'mandatory'=>true, 'tl_class'=>'clr')
+	'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'m4v', 'mandatory'=>true, 'tl_class'=>'clr'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_content']['fields']['videoSRCwebm'] = array(
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['videoSRCwebm'],
 	'exclude'                 => true,
 	'inputType'               => 'fileTree',
-	'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'webm', 'mandatory'=>true, 'tl_class'=>'clr')
+	'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'webm', 'mandatory'=>true, 'tl_class'=>'clr'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_content']['fields']['videoSRCogv'] = array(
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['videoSRCogv'],
 	'exclude'                 => true,
 	'inputType'               => 'fileTree',
-	'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'ogv', 'mandatory'=>true, 'tl_class'=>'clr')
-);
-$GLOBALS['TL_DCA']['tl_content']['fields']['fullsize']['eval']['tl_class'] = 'clr';
-$GLOBALS['TL_DCA']['tl_content']['fields']['fullsize']['eval']['submitOnChange'] = true;
-$GLOBALS['TL_DCA']['tl_content']['fields']['fullsizeSRC'] = array(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['fullsizeSRC'],
-	'exclude'                 => true,
-	'inputType'               => 'fileTree',
-	'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'jpg,jpeg', 'mandatory'=>true, 'tl_class'=>'clr')
+	'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'ogv', 'mandatory'=>true, 'tl_class'=>'clr'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
 );
 
 ?>

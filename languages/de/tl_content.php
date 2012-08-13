@@ -28,7 +28,7 @@
  */
 
 $GLOBALS['TL_LANG']['tl_content']['intro'] = array('Einleitung', 'Den Text als Einleitung formatieren.');
-$GLOBALS['TL_LANG']['tl_content']['loop'] = array('Video wiederholen', 'Das Video wird im Loop abgespielt.');
+$GLOBALS['TL_LANG']['tl_content']['again'] = array('Video wiederholen', 'Das Video wird im Loop abgespielt.');
 $GLOBALS['TL_LANG']['tl_content']['addM4v'] = array('Video im *.m4v Format hizufügen', 'Stellt eine Dateiauswahl für Videos vom Typ MPEG-4 h.264 bereit.');
 $GLOBALS['TL_LANG']['tl_content']['addWebm'] = array('Video im *.webm Format hizufügen', 'Stellt eine Dateiauswahl für Videos vom Typ WebM bereit.');
 $GLOBALS['TL_LANG']['tl_content']['addOgv'] = array('Video im *.ogv Format hizufügen', 'Stellt eine Dateiauswahl für Videos vom Typ Ogg Vorbis bereit.');
