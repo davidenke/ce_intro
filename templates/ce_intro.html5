@@ -1,0 +1,52 @@
+<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<?php if ($this->headline): ?>
+	<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+<?php endif; ?>
+
+	<figure class="image_container">
+		<img class="intro_poster" src="<?php echo $this->image; ?>" alt="Intro <?php echo $this->id; ?>">
+<?php if ($this->video): ?>
+		<a class="intro_video" id="intro_player_<?php echo $this->id; ?>" href="<?php echo $this->videfallback; ?>"></a>
+		<script src="/system/modules/ce_intro/html/js/jquery.jplayer.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				if (!$('body.mobile').length)
+					$('#intro_player_<?php echo $this->id; ?>').jPlayer({
+						swfPath: '/system/modules/ce_intro/html/swf/jplayer.swf',
+						solution: 'html,flash',
+						preload: 'auto',
+						supplied: '<?php echo implode(',', $this->types); ?>',
+						loop: true,
+						wmode: 'window',
+						fullScreen: true,
+						size: {
+							width: '1024px',
+							height: '576px',
+							cssClass: 'fullscreen'
+						},
+						sizeFull: {
+							width: '100%',
+							height: '100%',
+							cssClass: 'fullscreen'
+						},
+						ready: function() {
+							$(this).jPlayer('setMedia', {
+<?php foreach ($this->types as $type): ?>
+								<?php echo $type; ?>: '<?php echo $this->{'video' . $type}; ?>',
+<?php endforeach; ?>
+								poster: '<?php echo $this->image; ?>'
+							}).jPlayer('play');
+							$.page.resize();
+						},
+						play: function() {
+							$('#loader').fadeOut(200);
+						},
+						ended: function() {
+							$(this).jPlayer('play');
+						}
+					});
+			});
+		</script>
+<?php endif; ?>
+	</figure>
+</div>
